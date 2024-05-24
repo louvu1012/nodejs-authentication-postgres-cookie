@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 function authenticateToken(req, res, next) {
-  const token = req.cookies.token;
+  const token = req.cookies.ACCESS_TOKEN;
   if (!token) {
     return res.status(401).json({ message: 'Access denied' });
   }
