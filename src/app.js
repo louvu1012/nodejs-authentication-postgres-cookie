@@ -11,7 +11,8 @@ app.use(cookieParser());
 // Enable CORS for all origins
 app.use(cors({
   origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'], // The origin you want to allow
-  credentials: true // Enable credentials
+  credentials: true, // Enable credentials
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
 }));
 
 app.use('/api/auth', authRoutes);
