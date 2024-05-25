@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('ACCESS_TOKEN', token, { httpOnly: true, secure: isProduction, maxAge: 63072000,expires:63072000}); //, domain: 'new-react-sigma.vercel.app', maxAge: 30 * 24 * 60 * 60 * 1000
+    res.cookie('ACCESS_TOKEN', token, { sameSite:'none',httpOnly: true, secure: true, maxAge: 63072000,expires:63072000}); //, domain: 'new-react-sigma.vercel.app', maxAge: 30 * 24 * 60 * 60 * 1000
     res.json({ message: 'Login successful' });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in' });
