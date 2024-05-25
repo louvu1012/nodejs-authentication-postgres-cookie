@@ -8,6 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://new-react-sigma.vercel.app");
+  // res.header("Access-Control-Allow-Origin", "http://http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Enable CORS for all origins
 app.use(cors({
   origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'], // The origin you want to allow
