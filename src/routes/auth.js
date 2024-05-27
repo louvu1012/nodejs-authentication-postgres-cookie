@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('ACCESS_TOKEN', token, { httpOnly: true, secure: true, expires: 63072000, sameSite: 'none' }); //, maxAge: 63072000
+    res.cookie('ACCESS_TOKEN', token, { httpOnly: true, secure: true, maxAge: 63072000, expires: 63072000, sameSite: 'none' });
     res.json({ message: 'Login successful' });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in' });
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', authenticateToken, (req, res) => {
-    res.clearCookie('ACCESS_TOKEN', { httpOnly: true, secure: true, expires: 63072000, sameSite: 'none' });
+    res.clearCookie('ACCESS_TOKEN', { httpOnly: true, secure: true, maxAge: 63072000, expires: 63072000, sameSite: 'none' });
     res.json({ message: 'Logout successful' });
 });
 
