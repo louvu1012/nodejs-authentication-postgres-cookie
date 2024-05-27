@@ -15,7 +15,8 @@ app.use(function(req, res, next) {
 
 // Enable CORS for all origins
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'],
+  origin: '*',
+  // origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'],
   credentials: true, // Enable credentials
 }));
 
