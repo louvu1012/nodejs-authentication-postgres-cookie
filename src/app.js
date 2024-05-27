@@ -8,17 +8,24 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin","*");
+// Enable CORS for all origins
+app.use(cors({ origin: '*' }));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin); // Cho phép tất cả các nguồn gốc
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
 
-// Enable CORS for all origins
-app.use(cors({
-  origin: '*',
-  // origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'],
-  credentials: true, // Enable credentials
-}));
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin","*");
+//   next();
+// });
+// app.use(cors({
+//   origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'],
+//   credentials: true, // Enable credentials
+// }));
 
 app.use('/api/auth', authRoutes);
 
