@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Enable CORS for all origins
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", req.headers.origin); // Cho phép tất cả các nguồn gốc
   res.header("Access-Control-Allow-Credentials", "true");
