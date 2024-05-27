@@ -9,16 +9,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "https://new-react-sigma.vercel.app");
-  // res.header("Access-Control-Allow-Origin", "http://http://localhost:3000");
   res.header("Access-Control-Allow-Origin","*");
-  //res.header()
   next();
 });
 
 // Enable CORS for all origins
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'], // The origin you want to allow
+  origin: ['*'], // The origin you want to allow
+  // origin: ['http://localhost:3000', 'https://new-react-sigma.vercel.app'],
   credentials: true, // Enable credentials
 }));
 

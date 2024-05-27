@@ -7,8 +7,6 @@ require('dotenv').config();
 
 const router = express.Router();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 router.post('/register', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -27,7 +25,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('ACCESS_TOKEN', token, { sameSite:'none',httpOnly: true, secure: true, maxAge: 63072000,expires:63072000}); //, domain: 'new-react-sigma.vercel.app', maxAge: 30 * 24 * 60 * 60 * 1000
+    res.cookie('ACCESS_TOKEN', token, { httpOnly: true, secure: true, sameSite:'none' }); //, maxAge: 63072000, expires:63072000
     res.json({ message: 'Login successful' });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in' });
@@ -35,7 +33,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', authenticateToken, (req, res) => {
-    res.clearCookie('ACCESS_TOKEN', { httpOnly: true, secure: isProduction });
+    res.clearCookie('ACCESS_TOKEN', { httpOnly: true, secure: true, sameSite:'none' });
     res.json({ message: 'Logout successful' });
 });
 
