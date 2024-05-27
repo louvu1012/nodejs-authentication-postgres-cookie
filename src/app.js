@@ -11,9 +11,9 @@ app.use(cookieParser());
 // Enable CORS for all origins
 app.use(cors({ origin: '*' }));
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // Cho phép tất cả các nguồn gốc
+  res.header("Access-Control-Allow-Origin", req.headers.origin); // Cho phép tất cả các nguồn gốc
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, HEAD, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
