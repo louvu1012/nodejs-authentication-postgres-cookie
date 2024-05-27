@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', authenticateToken, (req, res) => {
-    res.clearCookie('ACCESS_TOKEN', { sameSite: 'none', httpOnly: true, secure: true, sameSite: 'none' });
+    res.clearCookie('ACCESS_TOKEN', { httpOnly: true, secure: true, sameSite: 'none' });
     res.json({ message: 'Logout successful' });
 });
 
