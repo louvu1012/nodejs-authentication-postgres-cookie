@@ -15,5 +15,8 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ]
+  ],
+  "scripts": {
+    "buildCommand": "prisma generate && next build"
+  }
 }
