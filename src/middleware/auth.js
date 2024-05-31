@@ -1,7 +1,9 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-function authenticateToken(req, res, next) {
+dotenv.config();
+
+const authenticateToken = (req, res, next) => {
   const token = req.cookies.ACCESS_TOKEN;
   if (!token) {
     return res.status(401).json({ message: 'Access denied' });
@@ -16,4 +18,4 @@ function authenticateToken(req, res, next) {
   }
 }
 
-module.exports = authenticateToken;
+export default authenticateToken;

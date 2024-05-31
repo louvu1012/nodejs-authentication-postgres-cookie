@@ -1,8 +1,10 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const authRoutes = require('./routes/auth');
-require('dotenv').config();
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import authRoutes from './routes/auth.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());

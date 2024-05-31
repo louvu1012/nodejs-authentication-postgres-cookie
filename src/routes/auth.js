@@ -1,9 +1,11 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { createUser, findUserByEmail, findUserById } = require('../models/user');
-const authenticateToken = require('../middleware/auth');
-require('dotenv').config();
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { createUser, findUserByEmail, findUserById } from '../models/user.js';
+import authenticateToken from '../middleware/auth.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -49,4 +51,4 @@ router.get('/me', authenticateToken, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
