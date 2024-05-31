@@ -1,0 +1,107 @@
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  // directUrl    = env("DIRECT_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  VERIFYING
+}
+
+enum LocationStatus {
+  ACTIVE
+  REPORT
+  INACTIVE
+  DRAFT
+}
+
+model ConfigWebsite {
+  id              String     @id @default(cuid())
+  title           String
+  description     String
+  aboutUs         String     @db.Text
+  address         String
+  location        String
+  facebook        String
+  phone           String
+  gallery         String     @db.Text
+  menu            String     @db.Text
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String
+  email     String     @unique
+  phone     String?    @unique
+  password  String
+  role      UserRole   @default(USER)
+  status    UserStatus @default(VERIFYING)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Location  Location[]
+  Review    Review[]
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  code      String     @unique
+  gallery   String     @db.Text
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  location  Location[]
+}
+
+model Location {
+  id                String         @id @default(cuid())
+  name              String         @unique
+  titleSeo          String         @unique
+  bussinessHour     String?
+  address           String
+  position          String
+  websiteUrl        String
+  facebookUrl       String
+  phoneNumber       String
+  description       String         @db.Text
+  gallery           String         @db.Text
+  childAddressPhone String         @db.Text
+  status            LocationStatus @default(INACTIVE)
+  catId             String
+  category          Category?      @relation(fields: [catId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId            String
+  User              User?          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userIdUpdated     String
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  Review            Review[]
+
+  @@index([userId])
+  @@index([catId])
+}
+
+model Review {
+  id          String    @id @default(cuid())
+  stars       Int?
+  content     String?   @db.Text
+  locationId  String
+  location    Location? @relation(fields: [locationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      String
+  User        User?     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdAt   DateTime  @default(now())
+
+  @@index([userId])
+  @@index([locationId])
+}

@@ -8,9 +8,9 @@ require('dotenv').config();
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   try {
-    const user = await createUser(email, password);
+    const user = await createUser(email, password, name);
     res.status(201).json({ message: 'User registered', user });
   } catch (error) {
     res.status(500).json({ message: 'Error registering user' });
