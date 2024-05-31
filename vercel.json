@@ -15,13 +15,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "build": {
-    "env": {
-      "DATABASE_URL": "@database_url"
-    }
-  },
-  "scripts": {
-    "build": "prisma generate && next build"
-  }
+  ]
 }
