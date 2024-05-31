@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "builds": [
     {
       "src": "src/app.js",
@@ -15,8 +15,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "scripts": {
-    "buildCommand": "prisma generate && next build"
-  }
+  ]
 }
