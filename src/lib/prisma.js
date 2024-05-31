@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+require('dotenv').config();
 
 const db = globalThis.prisma || new PrismaClient();
 

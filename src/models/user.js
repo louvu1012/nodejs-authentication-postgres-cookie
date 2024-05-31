@@ -1,5 +1,5 @@
-const db = require('../db.js');
 const bcrypt = require('bcryptjs');
+const db = require('../lib/prisma');
 
 async function createUser(email, password, name) {
   const hashedPassword = await bcrypt.hash(password, 10);
